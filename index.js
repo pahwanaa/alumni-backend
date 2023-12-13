@@ -1,47 +1,25 @@
 const express = require("express") ;
 const app = express ();
-
-const admin = require("firebase-admin") ;
-const credentials = require("./key.json");
+const admin = require("./app/utils/firebase")
 const bcrypt = require('bcrypt');
+const AlumniRouter = require("./app/api/v1/alumni/route")
 
-admin. initializeApp({
-    credential: admin.credential. cert (credentials)
-});
 
 app.use(express.json())
 app.use(express.urlencoded ({extended: true}));
+
+
 const db = admin.firestore();
 const usersRef = db.collection('alumni');
 const jadwalRef = db.collection('penjadwalan');
 const beritaRef = db.collection('berita');
 
-//create data alumni
-app.post('/alumni/create', async (req, res) => {
-  try {
-    console.log(req.body);
-    
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    const userJson = {
-      nim: req.body.nim,
-      nama: req.body.nama,
-      tempat_lahir: req.body.tempat_lahir,
-      tanggal_lahir: req.body.tanggal_lahir,
-      alamat: req.body.alamat,
-      no_telepon: req.body.no_telepon,
-      email: req.body.email,
-      password: hashedPassword, 
-      gelar_akademik: req.body.gelar_akademik,
-      status: req.body.status,
-      foto: req.body.foto,
-    };
+app.get('/', async(req, res)=>{
+  res.send("This is API for Alumni app")
+})
 
-    const response = await db.collection("alumni").add(userJson);
-    res.send(response);
-  } catch (error) {
-    res.send(error);
-  }
-});
+//create data alumni
+app.use('/api/v1/cms', AlumniRouter)
 
 //read all alumni
 app.get('/alumni/all', async (req, res) => {
