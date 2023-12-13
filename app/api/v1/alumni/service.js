@@ -3,8 +3,7 @@ const admin = require("../../../utils/firebase")
 const db = admin.firestore();
 
 const create = async ( req, res, next) => {
-    const salt = bcrypt.genSaltSync(10)
-    const hashedPassword = bcrypt.hashSync(req.body.password, salt);
+    const hashedPassword = bcrypt.hashSync(req.body.password, 10);
         
         const userJson = {
           nim: req.body.nim,
