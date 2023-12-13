@@ -9,7 +9,7 @@ admin. initializeApp({
     credential: admin.credential. cert (credentials)
 });
 
-app.use(express.json());
+app.use(express.json())
 app.use(express.urlencoded ({extended: true}));
 const db = admin.firestore();
 const usersRef = db.collection('alumni');
