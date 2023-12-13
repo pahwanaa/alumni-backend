@@ -20,24 +20,6 @@ app.get('/', async(req, res)=>{
 //create data alumni
 app.use('/api/v1/cms', AlumniRouter)
 
-//read alumni by id
-app.get('/alumni/:id', async (req, res) => {
-  try {
-    const userRef = db.collection("alumni").doc(req.params.id);
-    const response = await userRef.get();
-
-    if (!response.exists) {
-      res.status(404).send('Alumni not found');
-      return;
-    }
-
-    res.send(response.data());
-  } catch (error) {
-    console.error("Error:", error);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
 //edit alumni
 app.patch('/alumni/update/:id', async (req, res) => {
     try {

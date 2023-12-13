@@ -3,7 +3,7 @@ const admin = require("../../../utils/firebase")
 const db = admin.firestore();
 const usersRef = db.collection('alumni');
 
-const create = async ( req, res, next) => {
+const create = async ( req) => {
     const hashedPassword = bcrypt.hashSync(req.body.password, 10);
     const userJson = {
       nim: req.body.nim,
@@ -24,7 +24,7 @@ const create = async ( req, res, next) => {
     return result
 }
 
-const get = async ( req, res, next) => {
+const get = async () => {
 
   let responseArr = [];
   const response = await usersRef.get();
@@ -36,7 +36,7 @@ const get = async ( req, res, next) => {
   return responseArr;
 }
 
-const getById = async ( req, res, next) => {
+const getById = async (req) => {
 
   const userRef = db.collection("alumni").doc(req.params.id);
     const response = await userRef.get();
