@@ -10,7 +10,6 @@ app.use(express.urlencoded ({extended: true}));
 
 
 const db = admin.firestore();
-const usersRef = db.collection('alumni');
 const jadwalRef = db.collection('penjadwalan');
 const beritaRef = db.collection('berita');
 

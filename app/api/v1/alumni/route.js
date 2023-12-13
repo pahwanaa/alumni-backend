@@ -1,10 +1,10 @@
 const express = require("express")
-const { createAlumni } = require("./controller")
+const { createAlumni, getAlumni } = require("./controller")
 const router = express()
 
 router.post ("/alumni/create", createAlumni)
+router.get ("/alumni/all", getAlumni)
 
-// router.get ("/alumni/all", getAlumni)
 // router.get('/alumni/all', async (req, res) => {
 //     try {
 //       const response = await usersRef.get();
