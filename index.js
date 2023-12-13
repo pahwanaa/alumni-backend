@@ -20,20 +20,6 @@ app.get('/', async(req, res)=>{
 //create data alumni
 app.use('/api/v1/cms', AlumniRouter)
 
-//read all alumni
-app.get('/alumni/all', async (req, res) => {
-  try {
-    const response = await usersRef.get();
-    let responseArr = [];
-    response.forEach(doc => {
-      responseArr.push(doc.data());
-    });
-    res.send(responseArr);
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
-
 //read alumni by id
 app.get('/alumni/:id', async (req, res) => {
   try {

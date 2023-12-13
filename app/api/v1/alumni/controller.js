@@ -26,7 +26,20 @@ const getAlumni = async ( req, res, next) => {
     }
 }
 
+const getAlumniById = async ( req, res, next) => {
+    try {
+        const result = await getAlumniById(req)
+
+        res.status(StatusCodes.OK).json({
+            data: result
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
 module.exports={
     createAlumni,
-    getAlumni
+    getAlumni,
+    getAlumniById
 }

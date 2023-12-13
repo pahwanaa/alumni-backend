@@ -36,7 +36,21 @@ const get = async ( req, res, next) => {
   return responseArr;
 }
 
+const getById = async ( req, res, next) => {
+
+  const userRef = db.collection("alumni").doc(req.params.id);
+    const response = await userRef.get();
+
+    if (!response.exists) {
+      res.status(404).send('Alumni not found');
+      return;
+    }
+  
+  return response;
+}
+
 module.exports={
     create,
-    get
+    get,
+    getById
 }
