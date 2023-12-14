@@ -1,5 +1,5 @@
 const { StatusCodes } = require('http-status-codes')
-const { create, get } = require('./service')
+const { create, get, edit, remove } = require('./service')
 
 
 const createAlumni = async ( req, res, next) => {
@@ -38,8 +38,34 @@ const getAlumniById = async ( req, res, next) => {
     }
 }
 
+const editAlumni = async ( req, res, next) => {
+    try {
+        const result = await edit(req)
+
+        res.status(StatusCodes.OK).json({
+            data: result
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+const deleteAlumni = async ( req, res, next) => {
+    try {
+        const result = await remove(req)
+
+        res.status(StatusCodes.OK).json({
+            data: result
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
 module.exports={
     createAlumni,
     getAlumni,
-    getAlumniById
+    getAlumniById,
+    editAlumni,
+    deleteAlumni
 }

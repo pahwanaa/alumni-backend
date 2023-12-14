@@ -17,57 +17,8 @@ app.get('/', async(req, res)=>{
   res.send("This is API for Alumni app")
 })
 
-//create data alumni
+// Route to Alumni API
 app.use('/api/v1/cms', AlumniRouter)
-
-//edit alumni
-app.patch('/alumni/update/:id', async (req, res) => {
-    try {
-      const id = req.params.id;
-      const NewNim = req.body.nim; 
-      const NewNama = req.body.nama;
-      const NewTempat_lahir = req.body.tempat_lahir;
-      const NewTanggal_lahir = req.body.tanggal_lahir;
-      const NewAlamat = req.body.alamat;
-      const NewNo_telepon = req.body.no_telepon;
-      const NewEmail = req.body.email;
-      const NewGelar_akademik = req.body.gelar_akademik;
-      const NewStatus = req.body.status;
-      const NewFoto = req.body.foto;
-      const NewPassword = req.body.password;
-  
-      if (!NewPassword) {
-        return res.status(400).send({ message: 'New password is required' });
-      }
-
-      const userRef = db.collection("alumni").doc(id);
-      const doc = await userRef.get();
-      if (!doc.exists) {
-        res.status(404).send({ message: 'Alumni not found' });
-      return;
-      }
-      const hashedNewPassword = await bcrypt.hash(NewPassword, 10);
-
-      await userRef.update({
-        nim: NewNim,
-        nama: NewNama,
-        tempat_lahir: NewTempat_lahir,
-        tanggal_lahir: NewTanggal_lahir,
-        alamat: NewAlamat,
-        no_telepon: NewNo_telepon,
-        email: NewEmail,
-        gelar_akademik: NewGelar_akademik,
-        status: NewStatus,
-        foto: NewFoto,
-        password: hashedNewPassword, // Update the hashed password
-      });
-  
-      res.send({ message: 'Alumni data updated successfully' });
-    } catch (error) {
-      console.error("Error:", error);
-      res.status(500).send({ message: 'Internal Server Error' });
-    }
-  });
 
 //delete alumni
 app.delete('/alumni/delete/:id', async (req, res) => {
