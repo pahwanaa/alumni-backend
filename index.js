@@ -3,6 +3,7 @@ const app = express ();
 const admin = require("./app/utils/firebase")
 const bcrypt = require('bcrypt');
 const AlumniRouter = require("./app/api/v1/alumni/route")
+const JadwalRouter = require("./app/api/v1/jadwal/route")
 
 
 app.use(express.json())
@@ -19,28 +20,7 @@ app.get('/', async(req, res)=>{
 
 // Route to Alumni API
 app.use('/api/v1/cms', AlumniRouter)
-
-//delete alumni
-app.delete('/alumni/delete/:id', async (req, res) => {
-    try {
-      const id = req.params.id;
-      const userRef = db.collection("alumni").doc(id);
-  
-      const doc = await userRef.get();
-      if (!doc.exists) {
-        res.status(404).send({ message: 'Alumni not found' });
-        return;
-      }
-  
-      const response = await userRef.delete();
-      res.send({ message: 'Alumni data deleted successfully' });
-    } catch (error) {
-      res.status(500).send(error.message);
-    }
-  });
-
-
-
+app.use('/api/v1/cms', JadwalRouter)
 
 //create data jadwal
 app.post('/jadwal/create', async (req, res) =>{

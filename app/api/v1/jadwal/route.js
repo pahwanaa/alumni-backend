@@ -1,8 +1,8 @@
 const express = require("express")
-const { createAlumni, getAlumni, getAlumniById, editAlumni, deleteAlumni } = require("./controller")
+const { createJadwal, getAlumni, getAlumniById, editAlumni, deleteAlumni } = require("./controller")
 const router = express()
 
-router.post ("/alumni/create", createAlumni)
+router.post ("/jadwal/create", createJadwal)
 router.get ("/alumni/all", getAlumni)
 router.get ("/alumni/:id", getAlumniById)
 router.patch ("/alumni/update/:id", editAlumni)
