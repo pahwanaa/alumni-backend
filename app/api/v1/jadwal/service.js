@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const admin = require("../../../utils/firebase")
 const db = admin.firestore();
+const jadwalRef = db.collection('penjadwalan');
 
 const create = async ( req) => {
   const jadwalJson = {
@@ -16,13 +17,12 @@ const create = async ( req) => {
 }
 
 const get = async () => {
-
-  let responseArr = [];
-  const response = await usersRef.get();
-
-  response.forEach(doc => {
-    responseArr.push(doc.data());
-  });
+  
+  const response = await jadwalRef.get();
+    let responseArr = [];
+    response.forEach(doc => {
+        responseArr.push(doc.data());
+    });
   
   return responseArr;
 }

@@ -11,7 +11,6 @@ app.use(express.urlencoded ({extended: true}));
 
 
 const db = admin.firestore();
-const jadwalRef = db.collection('penjadwalan');
 const beritaRef = db.collection('berita');
 
 app.get('/', async(req, res)=>{
@@ -21,25 +20,6 @@ app.get('/', async(req, res)=>{
 // Route to Alumni API
 app.use('/api/v1/cms', AlumniRouter)
 app.use('/api/v1/cms', JadwalRouter)
-
-//create data jadwal
-app.post('/jadwal/create', async (req, res) =>{
-  try {
-      console.log(req.body);
-      const jadwalJson = {
-        nama: req.body.nama,
-        keterangan: req.body.keterangan,
-        tanggal: req.body.tanggal
-    };
-    
-    const docRef = await db.collection("penjadwalan").add(jadwalJson);
-    const response = await docRef.get();
-    
-    res.send(response.data());
-  } catch (error) {
-      res.send (error);
-  }
-});
 
 //read all jadwal
 app.get('/read/jadwal/all', async (req, res) => {

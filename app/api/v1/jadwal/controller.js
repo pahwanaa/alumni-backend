@@ -14,7 +14,7 @@ const createJadwal = async ( req, res, next) => {
     }
 }
 
-const getAlumni = async ( req, res, next) => {
+const getJadwal = async ( req, res, next) => {
     try {
         const result = await get(req)
 
@@ -64,7 +64,7 @@ const deleteAlumni = async ( req, res, next) => {
 
 module.exports={
     createJadwal,
-    getAlumni,
+    getJadwal,
     getAlumniById,
     editAlumni,
     deleteAlumni
