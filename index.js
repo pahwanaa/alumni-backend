@@ -1,11 +1,8 @@
 const express = require("express") ;
 const app = express ();
-const admin = require("./app/utils/firebase")
-const bcrypt = require('bcrypt');
 const AlumniRouter = require("./app/api/v1/alumni/route")
 const JadwalRouter = require("./app/api/v1/jadwal/route")
 const BeritaRouter = require("./app/api/v1/berita/route")
-const db = admin.firestore();
 
 app.use(express.json())
 app.use(express.urlencoded ({extended: true}));
