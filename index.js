@@ -21,21 +21,6 @@ app.get('/', async(req, res)=>{
 app.use('/api/v1/cms', AlumniRouter)
 app.use('/api/v1/cms', JadwalRouter)
 
-//read all jadwal
-app.get('/read/jadwal/all', async (req, res) => {
-  try {
-      const response = await jadwalRef.get();
-      let responseArr = [];
-      response.forEach(doc => {
-          responseArr.push(doc.data());
-      });
-      res.send(responseArr);
-  } catch (error) {
-      console.error(error);
-      res.status(500).send(error);
-  }
-});
-
 //read jadwal by id
 app.get('/read/jadwal/:id', async(req, res) =>{
     try {
@@ -52,55 +37,6 @@ app.get('/read/jadwal/:id', async(req, res) =>{
         res.send(error);
     }
 })
-
-//edit jadwal
-app.patch('/update/jadwal/:id', async (req, res) => {
-  try {
-      const id = req.params.id;
-      const newNama = req.body.nama;
-      const newKeterangan = req.body.keterangan;
-      const newTanggal = req.body.tanggal;
-
-      const jadwalRef = db.collection("penjadwalan").doc(id); // Ubah ke koleksi "penjadwalan"
-      const doc = await jadwalRef.get();
-
-      if (!doc.exists) {
-          res.status(404).send({ message: 'Jadwal not found' });
-          return;
-      }
-
-      await jadwalRef.update({
-          nama: newNama,
-          keterangan: newKeterangan,
-          tanggal: newTanggal
-      });
-
-      res.send({ message: 'Jadwal data updated successfully' });
-  } catch (error) {
-      res.status(500).send(error);
-  }
-});
-
-//delete jadwal
-app.delete('/delete/jadwal/:id', async(req, res) =>{
-  try {
-    const id = req.params.id;
-    const jadwalRef = db.collection("penjadwalan").doc(id);
-
-    const doc = await jadwalRef.get();
-    if (!doc.exists) {
-      res.status(404).send({ message: 'Jadwal not found' });
-      return;
-    }
-
-    const response = await jadwalRef.delete();
-    res.send({ message: 'Jadwal data deleted successfully' });
-  } catch (error) {
-    res.status(500).send(error.message);
-  }
-})
-
-
 
 
 //create data berita

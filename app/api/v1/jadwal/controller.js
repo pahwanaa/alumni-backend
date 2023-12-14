@@ -26,9 +26,9 @@ const getJadwal = async ( req, res, next) => {
     }
 }
 
-const getAlumniById = async ( req, res, next) => {
+const getJadwalById = async ( req, res, next) => {
     try {
-        const result = await getAlumniById(req)
+        const result = await getById(req)
 
         res.status(StatusCodes.OK).json({
             data: result
@@ -38,7 +38,7 @@ const getAlumniById = async ( req, res, next) => {
     }
 }
 
-const editAlumni = async ( req, res, next) => {
+const editJadwal = async ( req, res, next) => {
     try {
         const result = await edit(req)
 
@@ -50,7 +50,7 @@ const editAlumni = async ( req, res, next) => {
     }
 }
 
-const deleteAlumni = async ( req, res, next) => {
+const deleteJadwal = async ( req, res, next) => {
     try {
         const result = await remove(req)
 
@@ -65,7 +65,7 @@ const deleteAlumni = async ( req, res, next) => {
 module.exports={
     createJadwal,
     getJadwal,
-    getAlumniById,
-    editAlumni,
-    deleteAlumni
+    getJadwalById,
+    editJadwal,
+    deleteJadwal
 }

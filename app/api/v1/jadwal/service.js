@@ -29,57 +29,37 @@ const get = async () => {
 
 const getById = async (req) => {
 
-  const userRef = db.collection("alumni").doc(req.params.id);
+  const userRef = db.collection("penjadwalan").doc(req.params.id);
     const response = await userRef.get();
 
     if (!response.exists) {
-      res.status(404).send('Alumni not found');
+      res.status(404).send('Jadwal not found');
       return;
     }
   
-  return response;
+  return response.data();
 }
 
 const edit = async (req) => {
 
   const id = req.params.id;
-  const NewNim = req.body.nim; 
-  const NewNama = req.body.nama;
-  const NewTempat_lahir = req.body.tempat_lahir;
-  const NewTanggal_lahir = req.body.tanggal_lahir;
-  const NewAlamat = req.body.alamat;
-  const NewNo_telepon = req.body.no_telepon;
-  const NewEmail = req.body.email;
-  const NewGelar_akademik = req.body.gelar_akademik;
-  const NewStatus = req.body.status;
-  const NewFoto = req.body.foto;
-  const NewPassword = req.body.password;
+      const newNama = req.body.nama;
+      const newKeterangan = req.body.keterangan;
+      const newTanggal = req.body.tanggal;
 
-  if (!NewPassword) {
-    return res.status(400).send({ message: 'New password is required' });
-  }
+      const jadwalRef = db.collection("penjadwalan").doc(id); // Ubah ke koleksi "penjadwalan"
+      const doc = await jadwalRef.get();
 
-  const userRef = db.collection("alumni").doc(id);
-  const doc = await userRef.get();
-  if (!doc.exists) {
-    res.status(404).send({ message: 'Alumni not found' });
-  return;
-  }
-  const hashedNewPassword = await bcrypt.hash(NewPassword, 10);
+      if (!doc.exists) {
+          res.status(404).send({ message: 'Jadwal not found' });
+          return;
+      }
 
-  const result = await userRef.update({
-    nim: NewNim,
-    nama: NewNama,
-    tempat_lahir: NewTempat_lahir,
-    tanggal_lahir: NewTanggal_lahir,
-    alamat: NewAlamat,
-    no_telepon: NewNo_telepon,
-    email: NewEmail,
-    gelar_akademik: NewGelar_akademik,
-    status: NewStatus,
-    foto: NewFoto,
-    password: hashedNewPassword, // Update the hashed password
-  });
+      const result = await jadwalRef.update({
+          nama: newNama,
+          keterangan: newKeterangan,
+          tanggal: newTanggal
+      });
   
   return result;
 }
@@ -87,15 +67,15 @@ const edit = async (req) => {
 const remove = async (req) => {
 
   const id = req.params.id;
-  const userRef = db.collection("alumni").doc(id);
-  
-  const doc = await userRef.get();
-  if (!doc.exists) {
-    res.status(404).send({ message: 'Alumni not found' });
-    return;
-  }
+    const jadwalRef = db.collection("penjadwalan").doc(id);
 
-  const response = await userRef.delete();
+    const doc = await jadwalRef.get();
+    if (!doc.exists) {
+      res.status(404).send({ message: 'Jadwal not found' });
+      return;
+    }
+
+    const response = await jadwalRef.delete();
   
   return response;
 }

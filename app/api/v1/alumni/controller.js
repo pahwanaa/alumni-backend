@@ -1,5 +1,5 @@
 const { StatusCodes } = require('http-status-codes')
-const { create, get, edit, remove } = require('./service')
+const { create, get, getById, edit, remove } = require('./service')
 
 
 const createAlumni = async ( req, res, next) => {
@@ -28,7 +28,7 @@ const getAlumni = async ( req, res, next) => {
 
 const getAlumniById = async ( req, res, next) => {
     try {
-        const result = await getAlumniById(req)
+        const result = await getById(req)
 
         res.status(StatusCodes.OK).json({
             data: result

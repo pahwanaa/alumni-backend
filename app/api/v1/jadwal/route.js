@@ -1,11 +1,11 @@
 const express = require("express")
-const { createJadwal, getJadwal, getAlumniById, editAlumni, deleteAlumni } = require("./controller")
+const { createJadwal, getJadwal, getJadwalById, editJadwal, deleteJadwal } = require("./controller")
 const router = express()
 
 router.post ("/jadwal/create", createJadwal)
 router.get ("/jadwal/all", getJadwal)
-router.get ("/alumni/:id", getAlumniById)
-router.patch ("/alumni/update/:id", editAlumni)
-router.delete ("/alumni/delete/:id", deleteAlumni)
+router.get ("/jadwal/:id", getJadwalById)
+router.patch ("/jadwal/:id", editJadwal)
+router.delete ("/jadwal/:id", deleteJadwal)
 
 module.exports = router
