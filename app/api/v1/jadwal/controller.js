@@ -1,8 +1,8 @@
 const { StatusCodes } = require('http-status-codes')
-const { create, get, getById, edit, remove } = require('./service')
+const { create, get, edit, remove } = require('./service')
 
 
-const createAlumni = async ( req, res, next) => {
+const createJadwal = async ( req, res, next) => {
     try {
         const result = await create(req)
 
@@ -14,7 +14,7 @@ const createAlumni = async ( req, res, next) => {
     }
 }
 
-const getAlumni = async ( req, res, next) => {
+const getJadwal = async ( req, res, next) => {
     try {
         const result = await get(req)
 
@@ -26,7 +26,7 @@ const getAlumni = async ( req, res, next) => {
     }
 }
 
-const getAlumniById = async ( req, res, next) => {
+const getJadwalById = async ( req, res, next) => {
     try {
         const result = await getById(req)
 
@@ -38,7 +38,7 @@ const getAlumniById = async ( req, res, next) => {
     }
 }
 
-const editAlumni = async ( req, res, next) => {
+const editJadwal = async ( req, res, next) => {
     try {
         const result = await edit(req)
 
@@ -50,7 +50,7 @@ const editAlumni = async ( req, res, next) => {
     }
 }
 
-const deleteAlumni = async ( req, res, next) => {
+const deleteJadwal = async ( req, res, next) => {
     try {
         const result = await remove(req)
 
@@ -63,9 +63,9 @@ const deleteAlumni = async ( req, res, next) => {
 }
 
 module.exports={
-    createAlumni,
-    getAlumni,
-    getAlumniById,
-    editAlumni,
-    deleteAlumni
+    createJadwal,
+    getJadwal,
+    getJadwalById,
+    editJadwal,
+    deleteJadwal
 }
