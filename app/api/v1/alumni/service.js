@@ -46,7 +46,6 @@ const get = async (req) => {
 }
 
 const getById = async (req) => {
-
   const userRef = db.collection("alumni").doc(req.params.id);
     const response = await userRef.get();
 
@@ -98,7 +97,7 @@ const edit = async (req) => {
     foto: NewFoto,
     password: hashedNewPassword, // Update the hashed password
   });
-  
+
   return result;
 }
 
