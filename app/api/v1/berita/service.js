@@ -37,15 +37,17 @@ const get = async (req) => {
 
 const getById = async (req) => {
 
-  const userRef = db.collection("berita").doc(req.params.id);
-    const response = await userRef.get();
+  const beritaRef = db.collection("berita").doc(req.params.id);
+    const response = await beritaRef.get();
 
     if (!response.exists) {
       res.status(404).send('Berita not found');
       return;
     }
   
-  return response.data();
+    const beritaData = response.data();
+
+    return [beritaData]; 
 }
 
 const edit = async (req) => {

@@ -47,14 +47,16 @@ const get = async (req) => {
 
 const getById = async (req) => {
   const userRef = db.collection("alumni").doc(req.params.id);
-    const response = await userRef.get();
+  const response = await userRef.get();
 
-    if (!response.exists) {
-      res.status(404).send('Alumni not found');
+  if (!response.exists) {
+    res.status(404).send('Berita not found');
       return;
-    }
-  
-  return response;
+  }
+
+  const userData = response.data();
+
+  return [userData]; 
 }
 
 const edit = async (req) => {

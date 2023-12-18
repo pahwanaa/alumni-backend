@@ -36,15 +36,17 @@ const get = async (req) => {
 
 const getById = async (req) => {
 
-  const userRef = db.collection("penjadwalan").doc(req.params.id);
-    const response = await userRef.get();
+  const jadwalRef = db.collection("penjadwalan").doc(req.params.id);
+  const response = await jadwalRef.get();
 
-    if (!response.exists) {
-      res.status(404).send('Jadwal not found');
-      return;
-    }
-  
-  return response.data();
+  if (!response.exists) {
+    res.status(404).send('Jadwal not found');
+    return;
+  }
+
+  const jadwalData = response.data();
+
+  return [jadwalData]; 
 }
 
 const edit = async (req) => {
