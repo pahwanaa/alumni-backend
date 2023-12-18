@@ -16,14 +16,22 @@ const create = async ( req) => {
   return response.data()
 }
 
-const get = async () => {
-  
-  const response = await beritaRef.get();
-    let responseArr = [];
-    response.forEach(doc => {
-        responseArr.push(doc.data());
-    });
-  
+
+const get = async (req) => {
+  let responseArr = [];
+  let response
+
+  if(req.query.nama_info ){
+    response = await beritaRef.where("nama_info", "==", req.query.nama_info).get();
+  }
+  else{
+    response = await beritaRef.get();
+  }
+
+  response.forEach(doc => {
+    responseArr.push(doc.data());
+  });
+
   return responseArr;
 }
 

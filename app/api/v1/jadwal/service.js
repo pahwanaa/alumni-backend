@@ -16,14 +16,21 @@ const create = async ( req) => {
   return response
 }
 
-const get = async () => {
-  
-  const response = await jadwalRef.get();
-    let responseArr = [];
-    response.forEach(doc => {
-        responseArr.push(doc.data());
-    });
-  
+const get = async (req) => {
+
+  let responseArr = [];
+  let response
+
+  if(req.query.nama){
+    response = await jadwalRef.where("nama", "==", req.query.nama).get();
+  }else{
+    response = await jadwalRef.get();
+  }
+
+  response.forEach(doc => {
+    responseArr.push(doc.data());
+  });
+
   return responseArr;
 }
 

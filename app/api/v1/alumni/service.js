@@ -24,15 +24,24 @@ const create = async ( req) => {
     return result
 }
 
-const get = async () => {
-
+const get = async (req) => {
   let responseArr = [];
-  const response = await usersRef.get();
+  let response
+
+  if(req.query.nim ){
+    response = await usersRef.where("nim", "==", req.query.nim).get();
+  }
+  else if(req.query.nama){
+    response = await usersRef.where("nama", "==", req.query.nama).get();
+  }
+  else{
+    response = await usersRef.get();
+  }
 
   response.forEach(doc => {
     responseArr.push(doc.data());
   });
-  
+
   return responseArr;
 }
 
