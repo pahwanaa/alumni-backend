@@ -1,5 +1,5 @@
 const { StatusCodes } = require('http-status-codes')
-const { create, get, edit, remove } = require('./service')
+const { create, get, getById, edit, remove } = require('./service')
 
 
 const createBerita = async ( req, res, next) => {
@@ -34,7 +34,9 @@ const getBeritaById = async ( req, res, next) => {
             data: result
         })
     } catch (error) {
-        next(error)
+        res.status(StatusCodes.NOT_FOUND).json({
+            error: 'Berita not found',
+        });
     }
 }
 
@@ -60,7 +62,9 @@ const deleteBerita = async ( req, res, next) => {
             data: result
         })
     } catch (error) {
-        next(error)
+        res.status(StatusCodes.NOT_FOUND).json({
+            error: 'Berita not found',
+        });
     }
 }
 
