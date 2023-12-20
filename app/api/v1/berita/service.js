@@ -34,7 +34,6 @@ const get = async (req) => {
 }
 
 const getById = async (req) => {
-
   const beritaRef = db.collection("berita").doc(req.params.id);
     const response = await beritaRef.get();
 
