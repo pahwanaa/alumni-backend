@@ -50,7 +50,7 @@ const getById = async (req) => {
   const response = await userRef.get();
 
   if (!response.exists) {
-    res.status(404).send('Berita not found');
+    res.status(404).send('Alumni not found');
       return;
   }
 
@@ -79,11 +79,6 @@ const edit = async (req) => {
   }
 
   const userRef = db.collection("alumni").doc(id);
-  const doc = await userRef.get();
-  if (!doc.exists) {
-    res.status(404).send({ message: 'Alumni not found' });
-  return;
-  }
   const hashedNewPassword = await bcrypt.hash(NewPassword, 10);
 
   const result = await userRef.update({

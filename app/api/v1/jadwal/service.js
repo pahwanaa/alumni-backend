@@ -10,10 +10,9 @@ const create = async ( req) => {
     tanggal: req.body.tanggal
   };
 
-  const docRef = await db.collection("penjadwalan").add(jadwalJson);
-  const response = await docRef.get();
+  const result = await db.collection("penjadwalan").add(jadwalJson);
 
-  return response
+  return result
 }
 
 const get = async (req) => {
@@ -40,8 +39,7 @@ const getById = async (req) => {
   const response = await jadwalRef.get();
 
   if (!response.exists) {
-    res.status(404).send('Jadwal not found');
-    return;
+    throw new Error('Jadwal not found');
   }
 
   const jadwalData = response.data();

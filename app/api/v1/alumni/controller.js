@@ -34,7 +34,9 @@ const getAlumniById = async ( req, res, next) => {
             data: result
         })
     } catch (error) {
-        next(error)
+        res.status(StatusCodes.NOT_FOUND).json({
+            error: 'Alumni not found',
+        });
     }
 }
 
@@ -46,7 +48,9 @@ const editAlumni = async ( req, res, next) => {
             data: result
         })
     } catch (error) {
-        next(error)
+        res.status(StatusCodes.NOT_FOUND).json({
+            error: 'Alumni not found',
+          });
     }
 }
 
@@ -58,7 +62,9 @@ const deleteAlumni = async ( req, res, next) => {
             data: result
         })
     } catch (error) {
-        next(error)
+        res.status(StatusCodes.NOT_FOUND).json({
+            error: 'Alumni not found',
+          });
     }
 }
 

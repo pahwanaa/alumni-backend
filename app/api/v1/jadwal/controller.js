@@ -34,7 +34,9 @@ const getJadwalById = async ( req, res, next) => {
             data: result
         })
     } catch (error) {
-        next(error)
+        res.status(StatusCodes.NOT_FOUND).json({
+            error: 'Jadwal not found',
+        });
     }
 }
 
@@ -46,7 +48,9 @@ const editJadwal = async ( req, res, next) => {
             data: result
         })
     } catch (error) {
-        next(error)
+        res.status(StatusCodes.NOT_FOUND).json({
+            error: 'Jadwal not found',
+        });
     }
 }
 
@@ -58,7 +62,9 @@ const deleteJadwal = async ( req, res, next) => {
             data: result
         })
     } catch (error) {
-        next(error)
+        res.status(StatusCodes.NOT_FOUND).json({
+            error: 'Jadwal not found',
+        });
     }
 }
 

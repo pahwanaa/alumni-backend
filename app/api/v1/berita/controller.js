@@ -46,7 +46,9 @@ const editBerita = async ( req, res, next) => {
             data: result
         })
     } catch (error) {
-        next(error)
+        res.status(StatusCodes.NOT_FOUND).json({
+            error: 'Berita not found',
+        });
     }
 }
 

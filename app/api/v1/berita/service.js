@@ -10,10 +10,8 @@ const create = async ( req) => {
     foto_info: req.body.foto_info
   };
 
-  const docRef = await db.collection("berita").add(beritaJson);
-  const response = await docRef.get();
-
-  return response.data()
+  const result = await db.collection("berita").add(beritaJson);
+  return result
 }
 
 
